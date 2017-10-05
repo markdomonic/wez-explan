@@ -1,0 +1,113 @@
+mixin exPlanForm(exPlan = {})
+
+  form(action=`/add/${exPlan._id || ''}` method="POST" class="card" enctype="multipart/form-data")
+
+    // Exercise Title
+    label(for="exercise") Exercise
+    input(type="text" name="exercise" value=exPlan.exercise)
+    
+    // Key Points
+    label(for="keyPoints") Key Points
+    textarea(name="keyPoints")= exPlan.keyPoints
+
+    //- photo
+    label(for="photo") Photo
+    input(type="file", id="photo" name="photo" accepts="image/gif, image.png, image.jpeg")
+
+    // Can we put a div in here?
+    
+    
+    // Type
+    // TODO: probably bring in the options from the router as variables    
+    
+    table
+      td
+        label(for="type") Type
+        - const options = ["BW", "HIIT"];
+        select(name="type")
+          option(value="BW", selected = exPlan.type == "BW") BW
+          option(value="HIIT", selected = exPlan.type == "HIIT") HIIT
+      td(width=100)
+      td
+        // Muscle Group 
+        // TODO: probably bring in the options from the router as variables
+        label(for="muscleGroup") Muscle Group
+        select(name="muscleGroup")
+          option(value="Glutes", selected = exPlan.muscleGroup == "Glutes") Glutes
+          option(value="Glutes/Quads", selected = exPlan.muscleGroup == "Glutes/Quads") Glutes/Quads
+          option(value="All", selected = exPlan.muscleGroup == "All") All
+      td(width=100)
+      td
+        // Body Part
+        // TODO: probably bring in the options from the router as variables
+        label(for="bodyPart") Body Part
+        select(name="bodyPart")
+          option(value="Legs", selected = exPlan.bodyPart == "Legs") Legs
+          option(value="All", selected = exPlan.bodyPart == "All") All    
+    table
+      td(width=100)
+        // Reps
+        label(for="reps") Reps:
+        input(type="number" name="reps" value=exPlan.reps)
+      td(width=100)
+      td  
+        // Time
+        label(for="time") Mins:Seconds
+        input(type="time" name="time" step=1 value=exPlan.time)
+
+        // Time TODO
+        //- const tSeconds = exPlan.time 
+        //- const tMins = exPlan.time % 60
+        //- if(exPlan.time > 0)
+        //- - console.log(exPlan.time)
+        //- - const tDate = new Date(exPlan.time * 1000)
+        //- - let tHours = tDate.getUTCHours()
+        //- - let tMins = tDate.getUTCMinutes()
+        //- - let tSeconds = tDate.getUTCSeconds()
+        //- - if (tHours < 10) {tHours = "0"+tHours;}
+        //- - if (tMins < 10) {tMins = "0"+tMins;}
+        //- - if (tSeconds < 10) {tSeconds = "0"+tSeconds;}
+        //- - const tTime = tHours+":"+tMins+":"+tSeconds
+        //- 
+        //- - console.log(tDate)
+        //- - console.log(tSeconds)
+        //- - console.log(tMins)
+        //- - console.log(tHours)
+        //- - console.log(tTime)
+        
+        //- - const newExPlan
+        //- - const 
+        
+        //label(for="period") hh:mm:ss
+        //input(type="time" name="period" step="1" value=ex)
+        
+        //- if(aTime)
+        //- - const aTime = tTime.split(":")
+        //- - const newExPlan = 0
+        //each value, index in aTime
+        //  - if(index = 0) {newExPlan = value * 3600}
+        //- console.log(newExPlan)
+
+
+    // Intensity
+    - const levels = ["Low", "Medium", "High"];
+    - const intensity = exPlan.intensity || []
+    label(for="tags") Intensity
+    ul.tags
+      each level in levels
+        intensity.tag__choice
+          input(type="radio" id=level value=level name="intensity" checked=(intensity.includes(level)))
+          label(for="level") #{level}
+
+    // Tags
+    - const choices = ["Outside", "At Home", "On Holiday", "Gym", "No Gym", "Equipment"];
+    - const tags = exPlan.tags || []
+    label(for="tags") Tags
+    ul.tags
+      each choice in choices
+        tag.tag__choice
+          input(type="checkbox" id=choice value=choice name="tags" checked=(tags.includes(choice)))
+          label(for="choice") #{choice}
+    
+    // Finally Submit
+    input(type="submit" value="Save Exercise" class="button")

@@ -1,0 +1,18 @@
+extends layout
+
+block content
+  h2 #{exPlan.exercise}
+    .single
+      .single__hero
+        img.single__image(src=`/uploads/${exPlan.photo || ''}`)
+        //- h2.title.title--single
+          //- a(href=`/explans/${exPlan.slug}`) #{exPlan.exercise}
+    .single__details.inner
+      //- img.single__map
+      p= exPlan.keyPoints
+      if exPlan.tags
+        ul.tags
+          each tag in exPlan.tags
+            li.tag
+              a.tag__link(href=`/tags/${tag}`)
+                span.tag__text #{tag}

@@ -1,0 +1,11 @@
+NODE_ENV=development
+//DATABASE=mongodb://mdladd:hammer01@ds121494.mlab.com:21494/explan
+DATABASE=mongodb://locaclhost:27017/explan
+MAIL_USER=123
+MAIL_PASS=123
+MAIL_HOST=mailtrap.io
+MAIL_PORT=2525
+PORT=7777
+MAP_KEY=AIzaSyAddwFzEu83xzv_3kQjwLOrK3d35bmiOKg
+SECRET=snickers
+KEY=sweetsesh
